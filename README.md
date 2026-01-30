@@ -13,7 +13,20 @@ A complete React Native authentication system with signup, login, logout functio
 - **Navigation**: Stack-based navigation with authentication flow
 - **Comprehensive Testing**: Unit tests, integration tests, and property-based tests
 
-## 📱 Screenshots
+## 📱 Demo
+
+### 🎥 Video Walkthrough
+
+Watch the complete authentication flow in action:
+
+https://github.com/user-attachments/assets/your-video-file-name.mp4
+
+*The video demonstrates:*
+- User signup process with form validation
+- Login functionality with error handling
+- Home screen with user information display
+- Logout functionality
+- Session persistence across app restarts
 
 The app includes three main screens:
 - **Login Screen**: Email and password authentication
