@@ -1,97 +1,277 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native Authentication App
 
-# Getting Started
+A complete React Native authentication system with signup, login, logout functionality, and comprehensive testing suite including property-based testing.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 🚀 Features
 
-## Step 1: Start Metro
+- **User Registration**: Secure signup with form validation
+- **User Authentication**: Login with email and password
+- **Session Management**: Persistent authentication using AsyncStorage
+- **Form Validation**: Real-time validation with error handling
+- **Password Visibility Toggle**: Show/hide password functionality
+- **Responsive UI**: Clean, modern interface with proper keyboard handling
+- **Navigation**: Stack-based navigation with authentication flow
+- **Comprehensive Testing**: Unit tests, integration tests, and property-based tests
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 📱 Screenshots
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+The app includes three main screens:
+- **Login Screen**: Email and password authentication
+- **Signup Screen**: User registration with name, email, and password
+- **Home Screen**: Welcome screen displaying user information with logout option
 
-```sh
-# Using npm
-npm start
+## 🛠 Tech Stack
 
-# OR using Yarn
-yarn start
+- **React Native**: 0.83.1
+- **TypeScript**: Type-safe development
+- **React Navigation**: Navigation management
+- **AsyncStorage**: Local data persistence
+- **React Context**: State management
+- **Jest**: Testing framework
+- **React Native Testing Library**: Component testing
+- **fast-check**: Property-based testing
+
+## 📋 Prerequisites
+
+- Node.js >= 20
+- React Native development environment
+- iOS Simulator (for iOS development)
+- Android Studio/Emulator (for Android development)
+
+## 🔧 Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd KloudiousAssignment
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **iOS Setup** (if developing for iOS)
+   ```bash
+   cd ios && pod install && cd ..
+   ```
+
+4. **Start Metro bundler**
+   ```bash
+   npm start
+   ```
+
+5. **Run the app**
+   
+   For iOS:
+   ```bash
+   npm run ios
+   ```
+   
+   For Android:
+   ```bash
+   npm run android
+   ```
+
+## 🏗 Project Structure
+
+```
+src/
+├── contexts/
+│   └── AuthContext.tsx          # Authentication context and logic
+├── navigation/
+│   └── AppNavigator.tsx         # Navigation configuration
+├── screens/
+│   ├── LoginScreen.tsx          # Login interface
+│   ├── SignupScreen.tsx         # Registration interface
+│   └── HomeScreen.tsx           # Authenticated user home
+├── services/
+│   └── storage.ts               # AsyncStorage utilities
+├── types/
+│   └── auth.ts                  # TypeScript type definitions
+└── utils/
+    └── validation.ts            # Form validation utilities
+
+__tests__/
+├── unit/                        # Unit tests
+├── integration/                 # Integration tests
+└── properties/                  # Property-based tests
 ```
 
-## Step 2: Build and run your app
+## 🔐 Authentication Flow
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### Signup Process
+1. User enters name, email, and password
+2. Form validation checks for:
+   - Required fields
+   - Valid email format
+   - Password minimum length (6 characters)
+   - Email uniqueness
+3. User data is stored locally
+4. User is redirected to login screen (not auto-authenticated)
 
-### Android
+### Login Process
+1. User enters email and password
+2. Credentials are validated against stored users
+3. On success, user session is created and stored
+4. User is navigated to home screen
 
-```sh
-# Using npm
-npm run android
+### Session Management
+- User sessions persist across app restarts
+- Logout clears session data
+- Authentication state is managed globally via React Context
 
-# OR using Yarn
-yarn android
+## 🧪 Testing
+
+The project includes a comprehensive testing suite with three types of tests:
+
+### Unit Tests
+Test individual components and functions in isolation.
+
+```bash
+npm test -- __tests__/unit/
 ```
 
-### iOS
+### Integration Tests
+Test complete user flows and component interactions.
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+```bash
+npm test -- __tests__/integration/
 ```
 
-Then, and every time you update your native dependencies, run:
+### Property-Based Tests
+Test system properties across many generated inputs using fast-check.
 
-```sh
-bundle exec pod install
+```bash
+npm test -- __tests__/properties/
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+### Run All Tests
+```bash
+npm test
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Test Coverage
+The test suite covers:
+- Authentication logic (signup, login, logout)
+- Form validation
+- Navigation flows
+- Error handling
+- Session persistence
+- UI component behavior
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## 📝 API Reference
 
-## Step 3: Modify your app
+### AuthContext
 
-Now that you have successfully run the app, let's make changes!
+The `AuthContext` provides the following methods:
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+#### `signup(name: string, email: string, password: string): Promise<void>`
+Registers a new user with validation.
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+**Throws:**
+- "Name is required"
+- "Email is required" 
+- "Password is required"
+- "Invalid email format"
+- "Password must be at least 6 characters"
+- "Email already registered"
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+#### `login(email: string, password: string): Promise<void>`
+Authenticates an existing user.
 
-## Congratulations! :tada:
+**Throws:**
+- "Email is required"
+- "Password is required"
+- "Invalid email format"
+- "Invalid credentials"
 
-You've successfully run and modified your React Native App. :partying_face:
+#### `logout(): Promise<void>`
+Clears the current user session.
 
-### Now what?
+#### Properties
+- `user: User | null` - Current authenticated user
+- `isLoading: boolean` - Loading state during initialization
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+### Validation Utils
 
-# Troubleshooting
+#### `validateEmail(email: string): boolean`
+Validates email format using regex pattern.
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+#### `validatePassword(password: string): boolean`
+Validates password length (minimum 6 characters).
 
-# Learn More
+#### `validateRequired(value: string): boolean`
+Validates that a field is not empty.
 
-To learn more about React Native, take a look at the following resources:
+## 🎨 Styling
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+The app uses a consistent design system with:
+- **Primary Color**: #007AFF (iOS blue)
+- **Error Color**: #ff3b30 (iOS red)
+- **Background**: #fff (white)
+- **Text**: #333 (dark gray)
+- **Borders**: #ddd (light gray)
+
+## 🔍 Key Implementation Details
+
+### Form Validation
+- Real-time validation with error display
+- Comprehensive error handling for all edge cases
+- User-friendly error messages
+
+### Password Security
+- Secure text entry with visibility toggle
+- Password requirements clearly communicated
+- No password storage in plain text (demo purposes only)
+
+### Navigation
+- Stack-based navigation with proper typing
+- Authentication-aware routing
+- Smooth transitions between screens
+
+### State Management
+- React Context for global authentication state
+- Local component state for form handling
+- Persistent storage with AsyncStorage
+
+## 🚨 Security Considerations
+
+**Note**: This is a demo application. In production:
+- Passwords should be hashed before storage
+- Use secure authentication services (Firebase Auth, Auth0, etc.)
+- Implement proper token-based authentication
+- Add rate limiting and other security measures
+- Use HTTPS for all network requests
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Metro bundler issues**
+   ```bash
+   npx react-native start --reset-cache
+   ```
+
+2. **iOS build issues**
+   ```bash
+   cd ios && pod install && cd ..
+   ```
+
+3. **Android build issues**
+   ```bash
+   cd android && ./gradlew clean && cd ..
+   ```
+
+4. **Test failures**
+   ```bash
+   npm test -- --clearCache
+   ```
+
+## 📄 Scripts
+
+- `npm start` - Start Metro bundler
+- `npm run ios` - Run on iOS simulator
+- `npm run android` - Run on Android emulator
+- `npm test` - Run test suite
+- `npm run lint` - Run ESLint
