@@ -19,7 +19,7 @@ A complete React Native authentication system with signup, login, logout functio
 
 Watch the complete authentication flow in action:
 
-https://github.com/user-attachments/assets/your-video-file-name.mp4
+https://github.com/Akashkum1/KloudiousAssignment/raw/main/src/assets/demo.mp4
 
 *The video demonstrates:*
 - User signup process with form validation
@@ -55,7 +55,7 @@ The app includes three main screens:
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Akashkum1/KloudiousAssignment.git
    cd KloudiousAssignment
    ```
 
