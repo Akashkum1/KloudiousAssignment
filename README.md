@@ -19,7 +19,7 @@ A complete React Native authentication system with signup, login, logout functio
 
 Watch the complete authentication flow in action:
 
-[Watch demo video]([https://example.com/demo.mp4](https://github.com/Akashkum1/KloudiousAssignment/raw/main/src/assets/demo.mp4)
+[Watch demo video](https://github.com/Akashkum1/KloudiousAssignment/raw/main/src/assets/demo.mp4)
 
 *The video demonstrates:*
 - User signup process with form validation
